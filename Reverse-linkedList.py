@@ -19,14 +19,28 @@ class LinkedList:
             curr = curr.next
 
     def reverseList(self):
-        prev = None
         curr = self.head
+        prev = None
         while curr:
             next = curr.next
             curr.next = prev
             prev = curr
             curr = next
         self.head = prev
+
+    def rec_reverseList(self):
+        def _helper(curr, prev):
+            if not curr:
+                return prev
+
+            next = curr.next
+            curr.next = prev
+            prev = curr
+            curr = next            
+            return _helper(curr, prev)
+
+        self.head = _helper(curr=self.head, prev = None)
+
 
 list = LinkedList()
 list.push(2)
@@ -38,4 +52,8 @@ list.printList()
 print("")
 print("Reversed List")
 list.reverseList()
+list.printList()
+print("")
+print("Again Reversed  back")
+list.rec_reverseList()
 list.printList()
