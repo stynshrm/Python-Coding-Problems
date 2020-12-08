@@ -28,11 +28,11 @@ class LinkedList:
             curr = next
         self.head = prev
 
+    # Recursive solution 1
     def rec_reverseList(self):
         def _helper(curr, prev):
             if not curr:
                 return prev
-
             next = curr.next
             curr.next = prev
             prev = curr
@@ -40,20 +40,42 @@ class LinkedList:
             return _helper(curr, prev)
 
         self.head = _helper(curr=self.head, prev = None)
+    
+    # Recursive solution 2
+    def rev_rec(self):
+        def rrevList(curr):
+            if (curr == None or curr.next == None):
+                return curr    
+            newHead = rrevList(curr.next) 
+            curr.next.next= curr
+            curr.next = None
+            return newHead
+        self.head = rrevList(self.head)
 
 
-list = LinkedList()
-list.push(2)
-list.push(9)
-list.push(5)
-list.push(4)
+def rrevList(curr):
+    if (curr == None or curr.next == None):
+        return curr    
+    newHead = rrevList(curr.next) 
+    curr.next.next= curr
+    curr.next = None
+    return newHead
 
-list.printList()
+def print_List(curr):
+    while curr:
+        sep = ""
+        print(str(curr.data) + " --> ", end = "")
+        curr = curr.next
+
+slist = LinkedList()
+slist.push(2)
+slist.push(9)
+slist.push(5)
+slist.push(4)
+
+slist.printList()
 print("")
-print("Reversed List")
-list.reverseList()
-list.printList()
-print("")
-print("Again Reversed  back")
-list.rec_reverseList()
-list.printList()
+# a = rrevList(slist.head)
+# print_List(a)
+slist.rev_rec()
+slist.printList()
