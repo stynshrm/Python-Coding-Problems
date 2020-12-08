@@ -41,6 +41,10 @@ class LinkedList:
 
         self.head = _helper(curr=self.head, prev = None)
 
+    def reverse_recursively(self, node, pre=None):
+        if node.next != None:
+            self.reverse_recursively(node.next, pre=node)
+        node.next = pre
 
 list = LinkedList()
 list.push(2)
@@ -55,5 +59,5 @@ list.reverseList()
 list.printList()
 print("")
 print("Again Reversed  back")
-list.rec_reverseList()
+list.reverse_recursively()
 list.printList()
