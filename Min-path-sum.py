@@ -56,7 +56,7 @@ def minPathSum(triangle):
 # Space : O(n)
 
 def minPathSum(triangle):
-  temp = [0] * len(triangle)
+#   temp = [0] * len(triangle)
   cm = [0] * len(triangle)
   i = len(cm)-1
   while i >= 0:
