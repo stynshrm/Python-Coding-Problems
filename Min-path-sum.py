@@ -1,9 +1,9 @@
 #Problem given a triangle 
-#triangle=[[ 2].
+#triangle=[[ 2],
 #          [ 1, 4],
 #          [ 3, 19, 5],
 #          [12, 10, 3, 9],
-#          [ 7, 11, 8, 1, 4] 
+#          [ 7, 11, 8, 1, 4]] 
 #
 # desired_sum = 15
 # path = 2, 4, 5, 3, 1
@@ -22,7 +22,7 @@ def min(triangle, i=0, j=0):
     return triangle[i][j] + min(triangle[i+1][j], triangle[i+1][j+1])
 
 '''
-# Time : O(n**2)
+# Time : O(2**n)
 # Space : O(n)
 
 def minPathSum(triangle, i=0, j=0):
@@ -33,5 +33,40 @@ def minPathSum(triangle, i=0, j=0):
 
 
 # Dynamic Programing
+# Time : O(n**2)
+# Space : O(n**2)
+
+def minPathSum(triangle):
+    cm = [[0] * len(row) for row in triangle] #cache matrix
+    i = len(cm) - 1
+
+    while i >= 0:
+        for j in range(len(cm[i])):
+            if i == len(triangle) - 1:
+                cm[i][j] = triangle[i][j]
+            else:
+                cm[i][j] = triangle[i][j] + min(cm[i+1][j], cm[i+1][j+1])
+            
+        i -= 1
+    return cm[0][0]
 
 
+# Dynamic Programing 2
+# Time : O(n**2)
+# Space : O(n)
+
+def minPathSum(triangle):
+  temp = [0] * len(triangle)
+  cm = [0] * len(triangle)
+  i = len(cm)-1
+  while i >= 0:
+    for j in range(len(cm)):
+      if i == len(triangle)-1:
+        cm[j] = triangle[i][j]
+      else:
+        cm[j] = triangle[i][j] + min(temp[j], temp[j+1])
+    temp = cm
+    cm_len = len(cm)-1
+    cm = [0] * cm_len
+    i -= 1
+  return temp[0]
