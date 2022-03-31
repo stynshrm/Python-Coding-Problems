@@ -27,5 +27,4 @@ def longestUniqueSubsttr(string):
         # Updating the last seen value of the character 
         seen[string[end]] = end 
         maximum_length = max(maximum_length, end-start + 1) 
-
-
+    return maximum_length
